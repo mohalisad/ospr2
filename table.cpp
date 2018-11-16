@@ -16,3 +16,12 @@ Row& Table::operator[](int input){
 std::vector<Row>::size_type Table::size(){
     return rows.size();
 }
+std::string Table::check_filter(Filter *filters,int count){
+    std::string ret;
+    for(int i=0;i<rows.size();i++){
+        if(rows[i].check_filter(filters,count)){
+            ret += rows[i].getstrfields() +";";
+        }
+    }
+    return ret;
+}

@@ -14,5 +14,6 @@ public:
     void add_row(std::string inp);
     Row& operator[](int input);
     std::vector<Row>::size_type size();
+    std::string check_filter(Filter *filters,int count);
 };
 #endif //TABLE_H

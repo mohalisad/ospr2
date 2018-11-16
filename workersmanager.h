@@ -8,7 +8,7 @@
 class WorkersManager{
 private:
     int* workers;
-    int count;
+    int  count;
 public:
     WorkersManager(int count);
     void send(int index,std::string inp);

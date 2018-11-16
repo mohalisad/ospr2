@@ -1,6 +1,6 @@
 all:worker lb presenter
-worker:worker.o strtoken.o
-	g++ -o worker worker.o strtoken.o
+worker:worker.o strtoken.o table.o row.o
+	g++ -o worker worker.o strtoken.o table.o row.o
 lb:lb.o workersmanager.o inpparse.o strtoken.o strlib.o
 	g++ -o lb lb.o workersmanager.o inpparse.o strtoken.o strlib.o
 presenter:presenter.o
@@ -19,12 +19,12 @@ strtoken.o: strtoken.cpp strtoken.h
 	g++ -c strtoken.cpp
 table.o: table.cpp table.h
 	g++ -c table.cpp
-worker.o: worker.cpp strtoken.h
+worker.o: worker.cpp strtoken.h filter.h table.h
 	g++ -c worker.cpp
 workersmanager.o: workersmanager.cpp workersmanager.h
 	g++ -c workersmanager.cpp
 inpparse.h:filter.h
-row.h:strtoken.h
+row.h:strtoken.h filter.h
 table.h:strtoken.h row.h
 clean:
 	rm -rf *.o lb worker presenter

@@ -6,6 +6,7 @@
 #include "workersmanager.h"
 
 WorkersManager::WorkersManager(int count){
+    int pfd;
     int fd[2];
     this->count = count;
     workers = new int[count];
@@ -15,9 +16,9 @@ WorkersManager::WorkersManager(int count){
             dup2(fd[0],0);
             close(fd[0]);
             close(fd[1]);
-            int fd2 = open(PIPENAME, O_WRONLY);
-            dup2(fd2,1);
-            close (fd2);
+            pfd = open(PIPENAME, O_WRONLY);
+            dup2(pfd,1);
+            close (pfd);
             execv("worker",0);
         }else{
             workers[i] = fd[1];
