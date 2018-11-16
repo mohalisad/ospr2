@@ -1,11 +1,13 @@
-all:inpparse.o lb.o presenter.o row.o strlib.o strtoken.o table.o worker.o workermanager.o worker lb
+all:worker lb presenter
 worker:worker.o strtoken.o
 	g++ -o worker worker.o strtoken.o
-lb:lb.o workermanager.o
-	g++ -o lb lb.o workermanager.o
+lb:lb.o workersmanager.o inpparse.o strtoken.o strlib.o
+	g++ -o lb lb.o workersmanager.o inpparse.o strtoken.o strlib.o
+presenter:presenter.o
+	g++ -o presenter presenter.o
 inpparse.o:inpparse.cpp inpparse.h strtoken.h strlib.h
 	g++ -c inpparse.cpp
-lb.o:lb.cpp workermanager.h
+lb.o:lb.cpp workersmanager.h inpparse.h
 	g++ -c lb.cpp
 presenter.o:presenter.cpp
 	g++ -c presenter.cpp
@@ -19,10 +21,10 @@ table.o: table.cpp table.h
 	g++ -c table.cpp
 worker.o: worker.cpp strtoken.h
 	g++ -c worker.cpp
-workermanager.o: workermanager.cpp workermanager.h
-	g++ -c workermanager.cpp
+workersmanager.o: workersmanager.cpp workersmanager.h
+	g++ -c workersmanager.cpp
 inpparse.h:filter.h
 row.h:strtoken.h
 table.h:strtoken.h row.h
 clean:
-	rm -rf *.o
+	rm -rf *.o lb worker presenter

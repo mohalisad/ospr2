@@ -2,12 +2,15 @@
 #define WORKERMANAGER_H
 #include <string>
 #include <vector>
-class WorkerManager{
+
+#define PIPENAME "temp"
+
+class WorkersManager{
 private:
     int* workers;
     int count;
 public:
-    WorkerManager(int count);
+    WorkersManager(int count);
     void send(int index,std::string inp);
     void close_all();
 };

@@ -1,8 +1,11 @@
 #include <iostream>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
-#include "workermanager.h"
+#include "workersmanager.h"
 
-WorkerManager::WorkerManager(int count){
+WorkersManager::WorkersManager(int count){
     int fd[2];
     this->count = count;
     workers = new int[count];
@@ -12,6 +15,9 @@ WorkerManager::WorkerManager(int count){
             dup2(fd[0],0);
             close(fd[0]);
             close(fd[1]);
+            int fd2 = open(PIPENAME, O_WRONLY);
+            dup2(fd2,1);
+            close (fd2);
             execv("worker",0);
         }else{
             workers[i] = fd[1];
@@ -19,11 +25,13 @@ WorkerManager::WorkerManager(int count){
         }
     }
 }
-void WorkerManager::send(int index,std::string inp){
+
+void WorkersManager::send(int index,std::string inp){
     std::string temp = inp + "\n";
     write (workers[index],temp.c_str(),temp.size());
 }
-void WorkerManager::close_all(){
+
+void WorkersManager::close_all(){
     for (int i=0;i<count;i++)
         send(i,"close");
 }
