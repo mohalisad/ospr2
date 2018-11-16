@@ -9,5 +9,6 @@ private:
 public:
     WorkerManager(int count);
     void send(int index,std::string inp);
+    void close_all();
 };
 #endif //WORKERMANAGER_H

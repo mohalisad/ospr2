@@ -1,7 +1,11 @@
-all:inpparse.o lb.o presenter.o row.o strlib.o strtoken.o table.o worker.o workermanager.o
+all:inpparse.o lb.o presenter.o row.o strlib.o strtoken.o table.o worker.o workermanager.o worker lb
+worker:worker.o strtoken.o
+	g++ -o worker worker.o strtoken.o
+lb:lb.o workermanager.o
+	g++ -o lb lb.o workermanager.o
 inpparse.o:inpparse.cpp inpparse.h strtoken.h strlib.h
 	g++ -c inpparse.cpp
-lb.o:lb.cpp
+lb.o:lb.cpp workermanager.h
 	g++ -c lb.cpp
 presenter.o:presenter.cpp
 	g++ -c presenter.cpp
