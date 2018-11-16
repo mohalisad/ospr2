@@ -8,7 +8,6 @@ InputParser::InputParser(std::string input){
     StringTokenizer tokens(input,"-");
     for (int i = 0;i<tokens.size();i++){
         StringTokenizer temp(tokens[i],"= ");
-        if (temp.size() != 2)throw 0;
         if (temp[0] == "prc_cnt"){
             workernums = parseInt(temp[1]);
         }else if (temp[0] == "dir"){

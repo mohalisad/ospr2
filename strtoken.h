@@ -7,7 +7,6 @@ private:
     std::string tokenizers;
     std::vector<std::string>tokens;
     bool isItTokenizer(char input);
-
     static std::string charToString(char input);
 public:
     StringTokenizer(std::string mainString,std::string tokenizerChars);

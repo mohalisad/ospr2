@@ -1,7 +1,6 @@
 #include <sstream>
 #include <fstream>
 #include "strlib.h"
-#include "exception.h"
 
 int parseInt(std::string input){
     bool isItNegative=false;
@@ -11,7 +10,7 @@ int parseInt(std::string input){
     for(int i=isItNegative?1:0;(unsigned)i<input.size();i++){
         if(input[i]>='0'&&input[i]<='9'){
             number=number*10+input[i]-'0';
-        }else throw Exception("It's not an int number.");
+        }else return 0;
     }
     return isItNegative?-number:number;
 }

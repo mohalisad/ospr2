@@ -2,10 +2,7 @@
 #define INPPARSE_H
 #include <string>
 #include <vector>
-struct Filter{
-    std::string key;
-    std::string value;
-};
+#include "filter.h"
 class InputParser{
 private:
     std::vector<Filter>  filters;
