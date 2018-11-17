@@ -19,7 +19,7 @@ WorkersManager::WorkersManager(int count){
             pfd = open(PIPENAME, O_WRONLY);
             dup2(pfd,1);
             close (pfd);
-            execv("worker",0);
+            execv("worker",(char **)0);
         }else{
             workers[i] = fd[1];
             close(fd[0]);

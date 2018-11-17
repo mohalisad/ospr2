@@ -49,7 +49,7 @@ int run_presenter(){
         mkfifo(PIPENAME,0666);
         int fd = open(PIPENAME, O_RDONLY);
         dup2(fd,0);
-        execv("presenter",0);
+        execv("presenter",(char **)0);
     }
     return open(PIPENAME, O_WRONLY);
 }

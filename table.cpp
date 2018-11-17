@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "table.h"
 Table::Table(std::string _header):header(_header," "),headerstr(_header){}
 int Table::find_header_index(std::string inp){
