@@ -1,17 +1,17 @@
 all:worker lb presenter
-worker:worker.o strtoken.o table.o row.o
-	g++ -o worker worker.o strtoken.o table.o row.o
+worker:worker.o strtoken.o table.o row.o strlib.o
+	g++ -o worker worker.o strtoken.o table.o row.o strlib.o
 lb:lb.o workersmanager.o inpparse.o strtoken.o strlib.o
 	g++ -o lb lb.o workersmanager.o inpparse.o strtoken.o strlib.o
-presenter:presenter.o
-	g++ -o presenter presenter.o
+presenter:presenter.o strtoken.o table.o row.o strlib.o
+	g++ -o presenter presenter.o strtoken.o table.o row.o strlib.o
 inpparse.o:inpparse.cpp inpparse.h strtoken.h strlib.h
 	g++ -c inpparse.cpp
-lb.o:lb.cpp workersmanager.h inpparse.h
+lb.o:lb.cpp workersmanager.h inpparse.h strlib.h
 	g++ -c lb.cpp
-presenter.o:presenter.cpp
+presenter.o:presenter.cpp strtoken.h table.h strlib.h
 	g++ -c presenter.cpp
-row.o:row.cpp row.h table.h
+row.o:row.cpp row.h table.h strlib.h
 	g++ -c row.cpp
 strlib.o: strlib.cpp strlib.h
 	g++ -c strlib.cpp

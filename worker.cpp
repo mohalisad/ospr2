@@ -1,11 +1,14 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <unistd.h>
 #include "filter.h"
 #include "strtoken.h"
 #include "table.h"
 
 using namespace std;
+
+void print(std::string input);
 
 int main(){
     string line;
@@ -32,9 +35,13 @@ int main(){
                 }
                 search_result = table.check_filter(filters,filters_count);
             }
-            cout << "result;"<<search_result<<endl;
+            print(std::string("result;")+search_result+"\n");
         }
         if(tokens[0]=="close")break;
     }
     return 0;
+}
+
+void print(std::string input){
+    write(1,input.c_str(),input.size()+1);
 }

@@ -11,7 +11,7 @@ private:
 public:
     StringTokenizer(std::string mainString,std::string tokenizerChars);
     std::vector<std::string> getAllTokens();
-    std::string operator[](int input);
+    std::string operator[](int input)const;
     std::vector<std::string>::size_type size();
 };
 #endif

@@ -6,6 +6,7 @@
 #include <dirent.h>
 #include <vector>
 #include "inpparse.h"
+#include "strlib.h"
 #include "workersmanager.h"
 
 using namespace std;
@@ -16,9 +17,10 @@ string make_worker_message(string filename,InputParser &args);
 
 int main(){
     int pfd,workercount;
-    string line;
+    string line,sortby;
     vector<string> files;
     pfd = run_presenter();
+    bool ascend;
     while (getline(cin,line)){
         InputParser args(line);
         files = get_files(args.get_dir());
@@ -26,6 +28,10 @@ int main(){
             cout<<"there is no file"<<endl;
             continue;
         }
+        sortby = args.get_sortby(ascend);
+        string presenter_msg = "init;";
+        presenter_msg += intToString(files.size())+";"+(ascend?"1;":"0;")+sortby+"\n";
+        write(pfd,presenter_msg.c_str(),presenter_msg.size()+1);
         workercount = args.get_workernums();
         WorkersManager workers(workercount);
         for(int i=0;i<files.size();i++){
@@ -34,6 +40,7 @@ int main(){
         workers.close_all();
     }
     close(pfd);
+    return 0;
 }
 
 int run_presenter(){

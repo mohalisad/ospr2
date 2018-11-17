@@ -29,7 +29,7 @@ StringTokenizer::StringTokenizer(std::string mainString,std::string tokenizerCha
 std::vector<std::string> StringTokenizer::getAllTokens(){
     return tokens;
 }
-std::string StringTokenizer::operator[](int input){
+std::string StringTokenizer::operator[](int input) const{
     if(input<0)return std::string();
     if((unsigned)input<tokens.size()){
         return tokens[input];
