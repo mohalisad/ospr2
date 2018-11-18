@@ -23,6 +23,7 @@ int main(){
     bool ascend;
     while (getline(cin,line)){
         InputParser args(line);
+        if(line == "quit")break;
         files = get_files(args.get_dir());
         if(files.size()==0){
             cout<<"there is no file"<<endl;
